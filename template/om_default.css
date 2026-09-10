@@ -1,0 +1,73 @@
+body
+{
+    --theme-black: black;
+    --theme-white: white;
+    --theme-gray-50: #7f7f7f;
+    --theme-gray-25: #3f3f3f;
+    --theme-gray-75: #bfbfbf;
+    --theme-dark:  rgb(105, 87, 63);
+    --theme-light: rgb(230, 202, 164);
+    --theme-gender-masculine: #ddddff;
+    --theme-gender-feminine: #ffdddd;
+    --theme-gender-neuter: #dddddd;
+    --theme-background: #ffdddd;
+    --theme-transparent-100: #0000;
+    --theme-transparent-99: #0001;
+    --theme-transparent-60: #0009;
+    --theme-transparent-75: #000c;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    font-family: system-ui, —apple-system, Helvetica, Arial, sans-serif;
+}
+header
+{
+    position: relative;
+    height: 3rem;
+    width: 100vw;
+    width: 100dvw;
+    background-color: var(--theme-dark);
+    clear: both;
+    white-space: nowrap;
+}
+header h1
+{
+    font-size: 1.25rem;
+    font-weight: 900;
+    margin: 0;
+    padding-block: 0.5rem;
+    padding-inline-start: 1.5rem;
+    color: var(--theme-white);
+}
+footer
+{
+    position: relative;
+    height: 1.25rem;
+    width: 100vw;
+    width: 100dvw;
+    background-color: var(--theme-dark);
+    clear: both;
+    white-space: nowrap;
+    text-align: center;
+}
+footer a
+{
+    font-size: 0.75rem;
+    padding-block: 0.25rem;
+    color: var(--theme-white);
+    text-decoration: None;
+}
+main
+{
+    display: flex;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+aside
+{
+    background: var(--theme-transparent-99);
+    width: 12rem;
+}

@@ -2,12 +2,53 @@
 import os
 import sys
 from http.server import HTTPServer, SimpleHTTPRequestHandler
+import servUtils.htmx_tpl as hx
+import dataUtils.dataService as datServ
 
 HOST = "127.0.0.1"
 PORT = 8080
 
 class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
     """自定义请求处理器，添加 UTF-8 编码响应头与基础 MIME 类型支持"""
+    def do_GET(self):
+        # 拦截特定路由，返回对应的 HTML 片段
+        split_path = self.path.split("/")
+        if split_path[0] != "":
+            super.do_GET()
+            return
+        if split_path[1] == "individuals":
+            manuls = om_database.getIndividuals().values()
+            manul_sections = []
+            for manul in manuls:
+                manul_section = hx.fmt_card(manul, "zh")
+                manul_sections.append(manul_section)
+            html_snippet = "".join(manul_sections)
+        elif split_path[1] == "zoos":
+            super().do_GET()
+            return
+        elif split_path[1] == "image":
+            pic_path = "/".join([om_data_dir, "data", "individuals", split_path[2], "image", split_path[3]])
+            print(pic_path)
+            if not os.path.exists(pic_path):
+                pic_path = "/".join([om_serv_dir, "template", "resource", "profile.png"])
+            print(pic_path)
+            with open(pic_path, "rb") as f:
+                content = f.read()
+            self.send_response(200)
+            self.send_header("Content-Type", "image/png")
+            self.send_header("Content-Length", str(len(content)))
+            self.end_headers()
+            self.wfile.write(content)
+            return
+        else:
+            super().do_GET()
+            return
+        content = html_snippet.encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(content)))
+        self.end_headers()
+        self.wfile.write(content)
     def end_headers(self):
         # 强制针对 HTML、JSON、YAML 等文本资源添加 UTF-8 字符集，防止前端乱码
         if self.path.endswith((".html", ".json", ".yaml", ".yml", ".js", ".css")):
@@ -24,7 +65,19 @@ def run_server():
 
     server_address = (HOST, PORT)
     httpd = HTTPServer(server_address, OpenManulHTTPRequestHandler)
-
+    
+        
+    global om_serv_dir
+    om_serv_dir = os.path.abspath(os.path.join(base_dir, "../.."))
+    global om_data_dir
+    om_data_dir = os.path.abspath(os.path.join(base_dir, "../../../openManul"))
+    
+    global om_database
+    om_database = datServ.OpenManulDataService(om_data_dir)
+    
+    print(f"om_serv_dir: {om_serv_dir}")
+    print(f"om_data_dir: {om_data_dir}")
+        
     print(f" site: http://{HOST}:{PORT}")
     print(f" path: {base_dir}")
     print("press Ctrl+C to stop server...\n")

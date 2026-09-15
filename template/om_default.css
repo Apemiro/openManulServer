@@ -295,3 +295,20 @@ article
     font-size: 0.875rem;
     line-height: 1.4;
 }
+omr {
+    vertical-align: super;
+    font-size: 0.75rem;
+    line-height: 0;
+    color: var(--theme-white);
+    cursor: pointer;
+}
+omr::before {
+    content: "[";
+}
+omr::after {
+    content: "]";
+}
+omr:hover {
+    color: var(--theme-light);
+    text-decoration: underline;
+}

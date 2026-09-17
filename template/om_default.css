@@ -166,27 +166,79 @@ aside nav
 aside nav ul
 {
     list-style: none;
-    margin: 0.25rem 0.5rem;
+    margin: 0.25rem 0.5rem 0.5rem;
     padding: 0;
+}
+aside nav .nav-group
+{
+    margin-bottom: 0.25rem;
+}
+aside nav summary
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+}
+aside nav summary:hover
+{
+    !background-color: var(--theme-light);
+}
+aside nav summary:hover h2,
+aside nav summary:hover .toggle-icon
+{
+    color: var(--theme-black);
+}
+aside nav summary::-webkit-details-marker
+{
+    display: none;
 }
 aside nav h2
 {
-    margin: 0.5rem 1rem;
-    padding-block-start: 1rem;
+    margin: 0;
+    padding-block-start: 0;
     text-transform: uppercase;
     font-size: 0.875rem;
     font-weight: 900;
     color: var(--theme-dark);
 }
-aside nav h2:first-child
+aside nav .toggle-icon
 {
-    margin-top: 0;
+    font-size: 0.75rem;
+    color: var(--theme-dark);
+    transition: transform 0.3s ease, color 0.2s ease;
+}
+aside nav details:first-child
+{
+    margin-top: 0.5rem;
+}
+aside nav details[open] .toggle-icon
+{
+    transform: rotate(180deg);
+}
+aside nav .collapsible-wrapper
+{
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+}
+aside nav details[open] .collapsible-wrapper
+{
+    grid-template-rows: 1fr;
+}
+aside nav .collapsible-wrapper > *
+{
+    overflow: hidden;
 }
 aside nav li
 {
     margin: 0 0 0.1rem;
 }
-
 aside nav li a
 {
     display: block;
@@ -197,6 +249,17 @@ aside nav li a
     color: var(--theme-gray-50);
     text-decoration: none;
     transition: background-color 0.2s ease, color 0.2s ease;
+}
+aside nav li a::before {
+    content: "➖ ";
+}
+aside nav li a.active
+{
+    background-color: var(--theme-midst);
+    color: var(--theme-white);
+}
+aside nav li a.active::before {
+    content: "➕ ";
 }
 aside nav li a:hover
 {

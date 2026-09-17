@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="om_default.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="om_loader.js"></script>
 </head>
 <body>
     <header>
@@ -35,16 +36,24 @@
     <main>
         <aside>
             <nav>
-                <h2>Filter</h2>
-                <ul>
-                    <li><a href="">Option A</a></li>
-                    <li><a href="">Option B</a></li>
-                </ul>
-                <h2>Sort By</h2>
-                <ul>
-                    <li><a href="">Rule A</a></li>
-                    <li><a href="">Rule B</a></li>
-                </ul>
+                <details class="nav-group" open>
+                    <summary><h2>Filter</h2><i class="fa fa-chevron-down toggle-icon"></i></summary>
+                    <div class="collapsible-wrapper">
+                        <ul>
+                            <li><a href="javascript:void(0)" onclick="toggle(this)">Option A</a></li>
+                            <li><a href="javascript:void(0)" onclick="toggle(this)">Option B</a></li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="nav-group" open>
+                    <summary><h2>Sort By</h2><i class="fa fa-chevron-down toggle-icon"></i></summary>
+                    <div class="collapsible-wrapper">
+                        <ul>
+                            <li><a href="javascript:void(0)" onclick="toggle(this)">Rule A</a></li>
+                            <li><a href="javascript:void(0)" onclick="toggle(this)">Rule B</a></li>
+                        </ul>
+                    </div>
+                </details>
             </nav>
         </aside>
         <article hx-get="/individuals" hx-trigger="load" hx-target="this">

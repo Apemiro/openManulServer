@@ -19,3 +19,12 @@ function nav_deselectAll(sender, event){
         a.classList.remove('active');
     }
 }
+
+
+document.addEventListener('click', function(e){
+    document.querySelectorAll('header nav li.nav-dropdown details[open]').forEach(function(d){
+        if (!d.contains(e.target)) {
+            d.removeAttribute('open');
+        }
+    });
+});

@@ -198,6 +198,33 @@ aside nav summary::-webkit-details-marker
 {
     display: none;
 }
+aside nav .summary-actions
+{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+aside nav .summary-btn
+{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0;
+    border: none;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: var(--theme-dark);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+aside nav .summary-btn:hover
+{
+    background-color: var(--theme-midst);
+    color: var(--theme-white);
+}
 aside nav h2
 {
     margin: 0;
@@ -209,6 +236,7 @@ aside nav h2
 }
 aside nav .toggle-icon
 {
+	margin-inline-start: 0.3rem;
     font-size: 0.75rem;
     color: var(--theme-dark);
     transition: transform 0.3s ease, color 0.2s ease;

@@ -37,20 +37,34 @@
         <aside>
             <nav>
                 <details class="nav-group" open>
-                    <summary><h2>Filter</h2><i class="fa fa-chevron-down toggle-icon"></i></summary>
+                    <summary>
+                        <h2>Filter</h2>
+                        <span class="summary-actions">
+                            <button type="button" class="summary-btn" title="Select all" onclick="nav_selectAll(this, event)"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="summary-btn" title="Deselect all" onclick="nav_deselectAll(this, event)"><i class="fa fa-square-o"></i></button>
+                            <i class="fa fa-chevron-down toggle-icon"></i>
+                        </span>
+                    </summary>
                     <div class="collapsible-wrapper">
                         <ul>
-                            <li><a href="javascript:void(0)" onclick="toggle(this)">Option A</a></li>
-                            <li><a href="javascript:void(0)" onclick="toggle(this)">Option B</a></li>
+                            <li><a href="javascript:void(0)" onclick="nav_toggle(this)">Option A</a></li>
+                            <li><a href="javascript:void(0)" onclick="nav_toggle(this)">Option B</a></li>
                         </ul>
                     </div>
                 </details>
                 <details class="nav-group" open>
-                    <summary><h2>Sort By</h2><i class="fa fa-chevron-down toggle-icon"></i></summary>
+                    <summary>
+                        <h2>Sort By</h2>
+                        <span class="summary-actions">
+                            <button type="button" class="summary-btn" title="Select all" onclick="nav_selectAll(this, event)"><i class="fa fa-check-square-o"></i></button>
+                            <button type="button" class="summary-btn" title="Deselect all" onclick="nav_deselectAll(this, event)"><i class="fa fa-square-o"></i></button>
+                            <i class="fa fa-chevron-down toggle-icon"></i>
+                        </span>
+                    </summary>
                     <div class="collapsible-wrapper">
                         <ul>
-                            <li><a href="javascript:void(0)" onclick="toggle(this)">Rule A</a></li>
-                            <li><a href="javascript:void(0)" onclick="toggle(this)">Rule B</a></li>
+                            <li><a href="javascript:void(0)" onclick="nav_toggle(this)">Rule A</a></li>
+                            <li><a href="javascript:void(0)" onclick="nav_toggle(this)">Rule B</a></li>
                         </ul>
                     </div>
                 </details>

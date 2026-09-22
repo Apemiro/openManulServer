@@ -17,6 +17,7 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
             super.do_GET()
             return
         if split_path[1] == "individuals":
+            '''/individuals'''
             manuls = om_database.getIndividuals().values()
             manul_sections = []
             for manul in manuls:
@@ -27,8 +28,8 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
             super().do_GET()
             return
         elif split_path[1] == "image":
+            '''/image/manul/{ImgID}.png'''
             pic_path = "/".join([om_data_dir, "data", "individuals", split_path[2], "image", split_path[3]])
-            print(pic_path)
             if not os.path.exists(pic_path):
                 pic_path = "/".join([om_serv_dir, "template", "resource", "profile.png"])
             print(pic_path)
@@ -39,6 +40,22 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
             self.send_header("Content-Length", str(len(content)))
             self.end_headers()
             self.wfile.write(content)
+            return
+        elif split_path[1] == "reference":
+            '''/reference/manul/{ID}/{RefID}'''
+            if split_path[2] != 'manul':
+                super().do_GET()
+                return
+            manul_id  = split_path[3]
+            ref_id    = split_path[4]
+            the_manul = om_database.getIndividualByID(manul_id)
+            try:
+                refs  = the_manul["links"]
+                idx   = int(ref_id) - 1
+                html_snippet = f"""<span href="{refs[idx]}">{ref_id}</span>""" # 转义字符暂未处理
+            except:
+                super().do_GET()
+                return
             return
         else:
             super().do_GET()

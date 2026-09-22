@@ -46,4 +46,6 @@ class OpenManulDataService:
     def getIndividuals(self, filter=""):
         return self.manuls
 
+    def getIndividualByID(self, id):
+        return self.manuls.get(id, None)
 

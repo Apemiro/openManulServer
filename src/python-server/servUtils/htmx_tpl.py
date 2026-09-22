@@ -25,7 +25,7 @@ def __lifetime(desc):
 
 def fmt_card(indv, lang):
     htmx = f"""
-    <section class="card">
+    <section class="card" name="{indv["ID"]}">
         <div class="card-inner">
             <div class="card-face card-front">
                 <img class="card-image" src="image/manul/{indv.get("ImgID","")}.png" alt="">

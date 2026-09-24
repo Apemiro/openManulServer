@@ -30,7 +30,7 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
             zoos = om_database.getZoos().values()
             html_snippet = hx.fmt_zoo_filter(zoos, "zh")
         elif split_path[1] == "image":
-			'''image/manul/{imgID}'''
+            '''image/manul/{imgID}'''
             pic_path = "/".join([om_data_dir, "data", "individuals", split_path[2], "image", split_path[3]])
             print(pic_path)
             if not os.path.exists(pic_path):

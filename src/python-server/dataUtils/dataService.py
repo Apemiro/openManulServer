@@ -84,6 +84,9 @@ class OpenManulDataService:
 
     def getIndividuals(self, filter=""):
         return self.manuls
-
+    
+    def getIndividualByID(self, id):
+        return self.manuls[id]
+    
     def getZoos(self, filter=""):
         return self.zoos

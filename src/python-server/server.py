@@ -26,7 +26,11 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
         elif split_path[1] == "zoos":
             super().do_GET()
             return
+        elif split_path[1] == "nav":
+            zoos = om_database.getZoos().values()
+            html_snippet = hx.fmt_zoo_filter(zoos, "zh")
         elif split_path[1] == "image":
+			'''image/manul/{imgID}'''
             pic_path = "/".join([om_data_dir, "data", "individuals", split_path[2], "image", split_path[3]])
             print(pic_path)
             if not os.path.exists(pic_path):
@@ -40,6 +44,24 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(content)
             return
+        elif split_path[1] == "reference":
+            '''reference/manul/{ID}/{ref_id}'''
+            try:
+                # split_path[2] == "manul"
+                manul_id   = split_path[3]
+                ref_id_str = split_path[4]
+                indv = om_database.getIndividualByID(manul_id)
+                ref_idx = int(ref_id_str) - 1
+                redirection_url = indv["links"][ref_idx]
+                print(redirection_url)
+                self.send_response(302)
+                self.send_header("Location", redirection_url)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return
+            except:
+                super().do_GET()
+                return
         else:
             super().do_GET()
             return

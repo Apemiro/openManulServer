@@ -23,6 +23,14 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
                 manul_section = hx.fmt_card(manul, "zh")
                 manul_sections.append(manul_section)
             html_snippet = "".join(manul_sections)
+        elif split_path[1] == "tree":
+            html_snippet = "<p>This is family tree page</p>"
+        elif split_path[1] == "map":
+            html_snippet = "<p>This is map page</p>"
+        elif split_path[1] == "timeline":
+            html_snippet = "<p>This is timeline page</p>"
+        elif split_path[1] == "contribute":
+            html_snippet = "<p>This is contribute page</p>"
         elif split_path[1] == "zoos":
             super().do_GET()
             return

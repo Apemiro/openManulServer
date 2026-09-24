@@ -348,8 +348,9 @@ aside nav li
 }
 aside nav li a
 {
-    display: block;
-    padding: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: 2.5em 1fr;
+    padding: 0.25rem 0.5rem;
     border-radius: 0.25rem;
     font-weight: 700;
     line-height: 1.2;
@@ -362,8 +363,7 @@ aside nav li a
 }
 aside nav li a::before {
     content: "[－] ";
-    display: inline-block;
-    width: 2.5em;
+    display: block;
     font-weight: 400;
     opacity: 0.7;
 }

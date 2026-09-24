@@ -23,11 +23,11 @@
         <div>
             <nav>
                 <ul>
-                    <li><i class="fa fa-list"></i>List</li>
-                    <li><i class="fa fa-sitemap"></i>Tree</li>
-                    <li><i class="fa fa-map-marker"></i>Map</li>
-                    <li><i class="fa fa-clock-o"></i>Timeline</li>
-                    <li><i class="fa fa-pencil"></i>Contribute</li>
+                    <li hx-get="/individuals" hx-target="article" hx-swap="innerHTML"><i class="fa fa-list"></i>List</li>
+                    <li hx-get="/tree" hx-target="article" hx-swap="innerHTML"><i class="fa fa-sitemap"></i>Tree</li>
+                    <li hx-get="/map" hx-target="article" hx-swap="innerHTML"><i class="fa fa-map-marker"></i>Map</li>
+                    <li hx-get="/timeline" hx-target="article" hx-swap="innerHTML"><i class="fa fa-clock-o"></i>Timeline</li>
+                    <li hx-get="/contribute" hx-target="article" hx-swap="innerHTML"><i class="fa fa-pencil"></i>Contribute</li>
                     <li class="nav-dropdown">
                         <details>
                             <summary><i class="fa fa-language"></i>Language</summary>

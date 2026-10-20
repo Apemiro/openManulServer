@@ -24,11 +24,22 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
                 manul_section = hx.fmt_card(manul, "zh")
                 manul_sections.append(manul_section)
             html_snippet = "".join(manul_sections)
+        elif split_path[1] == "tree":
+            html_snippet = "<p>This is family tree page</p>"
+        elif split_path[1] == "map":
+            html_snippet = "<p>This is map page</p>"
+        elif split_path[1] == "timeline":
+            html_snippet = "<p>This is timeline page</p>"
+        elif split_path[1] == "contribute":
+            html_snippet = "<p>This is contribute page</p>"
         elif split_path[1] == "zoos":
             super().do_GET()
             return
+        elif split_path[1] == "nav":
+            zoos = om_database.getZoos().values()
+            html_snippet = hx.fmt_zoo_filter(zoos, "zh")
         elif split_path[1] == "image":
-            '''/image/manul/{ImgID}.png'''
+            '''image/manul/{imgID}'''
             pic_path = "/".join([om_data_dir, "data", "individuals", split_path[2], "image", split_path[3]])
             if not os.path.exists(pic_path):
                 pic_path = "/".join([om_serv_dir, "template", "resource", "profile.png"])
@@ -42,22 +53,23 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
             self.wfile.write(content)
             return
         elif split_path[1] == "reference":
-            '''/reference/manul/{ID}/{RefID}'''
-            if split_path[2] != 'manul':
-                super().do_GET()
-                return
-            manul_id  = split_path[3]
-            ref_id    = split_path[4]
-            the_manul = om_database.getIndividualByID(manul_id)
+            '''reference/manul/{ID}/{ref_id}'''
             try:
-                refs  = the_manul["links"]
-                idx   = int(ref_id) - 1
-                html_snippet = f"""<a href="{refs[idx]}">{ref_id}</a>""" # 转义字符暂未处理
-                print(html_snippet)
+                # split_path[2] == "manul"
+                manul_id   = split_path[3]
+                ref_id_str = split_path[4]
+                indv = om_database.getIndividualByID(manul_id)
+                ref_idx = int(ref_id_str) - 1
+                redirection_url = indv["links"][ref_idx]
+                print(redirection_url)
+                self.send_response(302)
+                self.send_header("Location", redirection_url)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return
             except:
                 super().do_GET()
                 return
-            # return
         else:
             super().do_GET()
             return

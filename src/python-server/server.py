@@ -52,11 +52,12 @@ class OpenManulHTTPRequestHandler(SimpleHTTPRequestHandler):
             try:
                 refs  = the_manul["links"]
                 idx   = int(ref_id) - 1
-                html_snippet = f"""<span href="{refs[idx]}">{ref_id}</span>""" # 转义字符暂未处理
+                html_snippet = f"""<a href="{refs[idx]}">{ref_id}</a>""" # 转义字符暂未处理
+                print(html_snippet)
             except:
                 super().do_GET()
                 return
-            return
+            # return
         else:
             super().do_GET()
             return

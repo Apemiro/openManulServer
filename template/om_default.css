@@ -477,6 +477,10 @@ omr {
     color: var(--theme-white);
     cursor: pointer;
 }
+omr a {
+	color: inherit;
+	text-decoration: inherit;
+}
 omr::before {
     content: "[";
 }

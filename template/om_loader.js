@@ -20,14 +20,17 @@ function nav_deselectAll(sender, event){
     }
 }
 
-document.addEventListener('load', function(sender){
+document.addEventListener('htmx:load', function(sender){
     const references = document.querySelectorAll('omr');
-    for(ref of references){
-        const manul_id = ref.closest('section').name;
-        const ref_id   = ref.innerHtml;
-        ref.hxGet      = `/references/manul/${manul_id}/${ref_id}`;
-        ref.hxTrigger  = "load";
-        ref.hxTarget   = "this";
+    for(let ref of references){
+        const manul_id = ref.closest('section').getAttribute("name");
+        const ref_id   = ref.innerHTML;
+        //以下这个判断只是因为htmx会多触发一次，临时解决
+        if(ref_id.match(/^[0-9]+$/)){
+            ref.setAttribute("hx-get", `/reference/manul/${manul_id}/${ref_id}`);
+            ref.setAttribute("hx-trigger", "load");
+            ref.setAttribute("hx-target", "this");
+        }
     }
 });
 
